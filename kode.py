@@ -26,7 +26,3 @@ wind = (df_wind_onshore["Generation (MW)"]+ df_wind_offshore["Generation (MW)"])
 sol = df_sol["Generation (MW)"]
 korrelasjon = sol.corr(wind)
 print(f"Korrelasjon mellom sol og vindkraft: {korrelasjon}")
-
-
-#Test Test 11
-#Test2
