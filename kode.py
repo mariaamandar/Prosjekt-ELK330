@@ -26,3 +26,30 @@ wind = (df_wind_onshore["Generation (MW)"]+ df_wind_offshore["Generation (MW)"])
 sol = df_sol["Generation (MW)"]
 korrelasjon = sol.corr(wind)
 print(f"Korrelasjon mellom sol og vindkraft: {korrelasjon}")
+
+#Plotter solkraft mot vindkraft...
+plt.scatter(sol, wind)
+
+plt.xlabel("Solkraftproduksjon (MW)")
+plt.ylabel("Vindkraftproduksjon (MW)")
+plt.title("Solkraft mot vindkraft")
+plt.grid()
+plt.show()
+
+# Plotter solkraft mot tid
+plt.figure(figsize=(12, 5))
+plt.plot(sol.index, sol)
+plt.xlabel("Tid")
+plt.ylabel("Solkraftproduksjon (MW)")
+plt.title("Solkraftproduksjon gjennom 2025")
+plt.grid()
+plt.show()
+
+# Plotter vindkraft mot tid
+plt.figure(figsize=(12, 5))
+plt.plot(wind.index, wind)
+plt.xlabel("Tid")
+plt.ylabel("Vindkraftproduksjon (MW)")
+plt.title("Vindkraftproduksjon gjennom 2025")
+plt.grid()
+plt.show()
