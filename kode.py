@@ -53,3 +53,26 @@ plt.ylabel("Vindkraftproduksjon (MW)")
 plt.title("Vindkraftproduksjon gjennom 2025")
 plt.grid()
 plt.show()
+
+#Redusere støy, lage mer "mykere" kurve:
+
+sol_myk = sol.rolling(window=168).mean()
+wind_myk = wind.rolling(window=168).mean()
+
+# Plotter solkraft mot tid
+plt.figure(figsize=(12, 5))
+plt.plot(sol_myk.index, sol_myk)
+plt.xlabel("Tid")
+plt.ylabel("Solkraftproduksjon (MW)")
+plt.title("Solkraftproduksjon gjennom 2025, redusert støy")
+plt.grid()
+plt.show()
+
+# Plotter vindkraft mot tid
+plt.figure(figsize=(12, 5))
+plt.plot(wind_myk.index, wind_myk)
+plt.xlabel("Tid")
+plt.ylabel("Vindkraftproduksjon (MW)")
+plt.title("Vindkraftproduksjon gjennom 2025, redusert støy")
+plt.grid()
+plt.show()
