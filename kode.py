@@ -1,6 +1,7 @@
 import pandas as pd
 import matplotlib.pyplot as plt
 
+
 df = pd.read_csv("SOLWINDONOFF2025.csv", na_values=["n/e"])
 
 df["Tid"] = (
@@ -55,11 +56,10 @@ plt.grid()
 plt.show()
 
 #Redusere støy, lage mer "mykere" kurve:
-
+#PLotter solkraft mot tid
 sol_myk = sol.rolling(window=168).mean()
 wind_myk = wind.rolling(window=168).mean()
 
-# Plotter solkraft mot tid
 plt.figure(figsize=(12, 5))
 plt.plot(sol_myk.index, sol_myk)
 plt.xlabel("Tid")
@@ -74,5 +74,40 @@ plt.plot(wind_myk.index, wind_myk)
 plt.xlabel("Tid")
 plt.ylabel("Vindkraftproduksjon (MW)")
 plt.title("Vindkraftproduksjon gjennom 2025, redusert støy")
+plt.grid()
+plt.show()
+
+
+#Enda mykere plot:
+
+sol_trend = sol.rolling(window=24*30, center=True, min_periods=1).mean()
+sol_trend2 = sol.rolling(window=24*30*3, center=True, min_periods=1).mean()
+
+plt.figure(figsize=(12, 5))
+plt.plot(sol_myk.index, sol_myk, label="Solkraft, 7 dagers gjennomsnitt")
+plt.plot(sol_trend.index, sol_trend, color="orange",
+         linewidth=2.5, label="Solkraft, 30 dagers gjennomsnitt")
+plt.plot(sol_trend2.index, sol_trend2, color="red",
+         linewidth=2.5, label="Solkraft, tre måneders gjennomsnitt")
+plt.xlabel("Tid")
+plt.ylabel("Solkraftproduksjon (MW)")
+plt.title("Solkraftproduksjon gjennom 2025")
+plt.legend()
+plt.grid()
+plt.show()
+
+wind_trend = wind.rolling(window=24*30, center=True, min_periods=1).mean()
+wind_trend2 = wind.rolling(window=24*30*3, center=True, min_periods=1).mean()
+
+plt.figure(figsize=(12, 5))
+plt.plot(wind_myk.index, wind_myk, label="Vindkraft, 7 dagers gjennomsnitt")
+plt.plot(wind_trend.index, wind_trend, color="orange",
+         linewidth=2.5, label="Vindkraft, 30 dagers gjennomsnitt")
+plt.plot(wind_trend2.index, wind_trend2, color="red",
+         linewidth=2.5, label="Vindkraft, tre måneders gjennomsnitt")
+plt.xlabel("Tid")
+plt.ylabel("Vindkraftproduksjon (MW)")
+plt.title("Vindkraftproduksjon gjennom 2025")
+plt.legend()
 plt.grid()
 plt.show()
