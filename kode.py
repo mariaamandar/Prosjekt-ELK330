@@ -111,3 +111,4 @@ plt.title("Vindkraftproduksjon gjennom 2025")
 plt.legend()
 plt.grid()
 plt.show()
+
