@@ -42,3 +42,4 @@ df = pd.concat(all_data, ignore_index=True)
 df.to_csv("vinddata_2018_2021.csv", index=False)
 
 print(df.shape)
+
