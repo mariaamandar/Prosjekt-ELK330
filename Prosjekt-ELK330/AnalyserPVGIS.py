@@ -135,7 +135,14 @@ daglig_data = data.resample("D").mean()
 
 # Fjerner dager uten målinger
 daglig_data = daglig_data.dropna()
+daglig_data = data.resample("D").mean()
 
+antall_timer = data.resample("D").count()
+
+daglig_data = daglig_data[
+    (antall_timer["Solkraftproduksjon"] >= 18) &
+    (antall_timer["Vindkraft"] >= 18)
+]
 
 print("\n--- Daglige målinger ---")
 print(daglig_data.head())
@@ -170,8 +177,8 @@ plt.title(
 
 plt.grid(alpha=0.3)
 plt.tight_layout()
+plt.savefig("Solkraft_mot_vindkraftPVGIS.png", dpi=300)
 plt.show()
-
 
 # Plotter daglig solinnstråling mot daglig vindkraft
 plt.figure(figsize=(9, 6))
@@ -192,4 +199,5 @@ plt.title(
 
 plt.grid(alpha=0.3)
 plt.tight_layout()
+plt.savefig("Daglig_solkraft_mot_vindkraftPVGIS.png", dpi=300)
 plt.show()

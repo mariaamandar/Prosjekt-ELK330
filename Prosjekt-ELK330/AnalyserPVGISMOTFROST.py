@@ -66,7 +66,7 @@ frost_hourly = frost["wind_speed(m/s)"].resample("h").mean()
 
 
 # Parametere for vindturbinen
-P_nominell = 4       # MW
+P_nominell = 3      # MW
 v_start = 3          # m/s
 v_nominell = 12      # m/s
 v_stopp = 25         # m/s
@@ -203,4 +203,5 @@ plt.title(
 
 plt.grid(alpha=0.3)
 plt.tight_layout()
+plt.savefig("Daglig_solkraft_mot_vindkraftPVGISFROST.png", dpi=300)
 plt.show()
