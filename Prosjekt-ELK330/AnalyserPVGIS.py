@@ -231,3 +231,26 @@ plt.tight_layout()
 plt.savefig("Solinnstraling_2018_2021.png", dpi=300)
 
 plt.show()
+
+
+plt.figure(figsize=(14, 6))
+
+plt.plot(
+    pvgis.index,
+    pvgis["WS10m"],
+    linewidth=0.5
+)
+
+plt.xlabel("Tid")
+plt.ylabel("Vindhastighet (m/s)")
+
+plt.title(
+    "Vindhastighet gjennom perioden 2018–2021"
+)
+
+plt.grid(alpha=0.3)
+plt.tight_layout()
+
+plt.savefig("Vindhastighet_2018_2021.png", dpi=300)
+
+plt.show()
