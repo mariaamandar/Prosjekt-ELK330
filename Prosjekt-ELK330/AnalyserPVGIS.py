@@ -254,3 +254,25 @@ plt.tight_layout()
 plt.savefig("Vindhastighet_2018_2021.png", dpi=300)
 
 plt.show()
+
+plt.figure(figsize=(14, 6))
+
+plt.plot(
+    data["Vindkraft"].index,
+    data["Vindkraft"],
+    linewidth=0.5
+)
+
+plt.xlabel("Tid")
+plt.ylabel("Vindproduksjon (MW)")
+
+plt.title(
+    "Vindproduksjon gjennom perioden 2018–2021"
+)
+
+plt.grid(alpha=0.3)
+plt.tight_layout()
+
+plt.savefig("Vindproduksjon_2018_2021.png", dpi=300)
+
+plt.show()
