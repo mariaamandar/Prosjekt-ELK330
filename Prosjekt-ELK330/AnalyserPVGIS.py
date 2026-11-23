@@ -201,3 +201,33 @@ plt.grid(alpha=0.3)
 plt.tight_layout()
 plt.savefig("Daglig_solkraft_mot_vindkraftPVGIS.png", dpi=300)
 plt.show()
+
+# Konverterer solinnstråling (G(i)) til numeriske verdier
+pvgis["G(i)"] = pd.to_numeric(
+    pvgis["G(i)"],
+    errors="coerce"
+)
+
+
+# Plotter solinnstråling gjennom årene
+plt.figure(figsize=(14, 6))
+
+plt.plot(
+    pvgis.index,
+    pvgis["G(i)"],
+    linewidth=0.5
+)
+
+plt.xlabel("Tid")
+plt.ylabel("Solinnstråling (W/m²)")
+
+plt.title(
+    "Solinnstråling gjennom perioden 2018–2021"
+)
+
+plt.grid(alpha=0.3)
+plt.tight_layout()
+
+plt.savefig("Solinnstraling_2018_2021.png", dpi=300)
+
+plt.show()
