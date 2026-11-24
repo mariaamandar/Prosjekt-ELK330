@@ -166,6 +166,37 @@ korrelasjon_vinter = vinter["Solkraftproduksjon"].corr(vinter["Vindkraft"])
 print(f"Sommer 2020: r = {korrelasjon_sommer:.3f} ({len(sommer)} dager)")
 print(f"Vinter 2020/2021: r = {korrelasjon_vinter:.3f} ({len(vinter)} dager)")
 
+fig, (ax_sommer, ax_vinter) = plt.subplots(
+    1, 2, figsize=(12, 5), sharex=True, sharey=True
+)
+
+ax_sommer.scatter(
+    sommer["Solkraftproduksjon"] * 1_000_000,
+    sommer["Vindkraft"],
+    color="tab:orange",
+    alpha=0.6,
+    s=25
+)
+ax_sommer.set_title(f"Sommer 2020 ($r = {korrelasjon_sommer:.3f}$)")
+ax_sommer.grid(alpha=0.3)
+
+ax_vinter.scatter(
+    vinter["Solkraftproduksjon"] * 1_000_000,
+    vinter["Vindkraft"],
+    color="tab:blue",
+    alpha=0.6,
+    s=25
+)
+ax_vinter.set_title(f"Vinter 2020/2021 ($r = {korrelasjon_vinter:.3f}$)")
+ax_vinter.grid(alpha=0.3)
+
+fig.supxlabel("Gjennomsnittlig solkraftproduksjon per døgn (W)")
+fig.supylabel("Gjennomsnittlig beregnet vindkraft per døgn (MW)")
+
+fig.tight_layout()
+fig.savefig("PVGIS_sommer_vinter.png", dpi=300)
+plt.show()
+
 # Scatterplot sommer: juni, julig, august 2020
 plt.scatter(
     sommer["Solkraftproduksjon"], 
