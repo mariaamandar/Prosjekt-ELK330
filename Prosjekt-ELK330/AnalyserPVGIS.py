@@ -39,11 +39,6 @@ pvgis["P"] = pd.to_numeric(pvgis["P"], errors="coerce")
 pvgis["WS10m"] = pd.to_numeric(pvgis["WS10m"], errors="coerce")
 
 
-# Korrigerer vindhastighet fra 96 m til 150 m
-alpha = 0.14
-
-vind_100m = pvgis["WS10m"] * (150 / 96) ** alpha
-
 
 # Parametere for vindturbin
 P_nominell = 3       # MW
@@ -74,7 +69,7 @@ def vindkraft(v):
         return 0
 
 
-vind_MW = vind_100m.apply(vindkraft)
+vind_MW = pvgis["WS10m"].apply(vindkraft)
 
 
 # Samler solinnstråling og vindkraft i ett datasett
