@@ -166,6 +166,13 @@ korrelasjon_vinter = vinter["Solkraftproduksjon"].corr(vinter["Vindkraft"])
 print(f"Sommer 2020: r = {korrelasjon_sommer:.3f} ({len(sommer)} dager)")
 print(f"Vinter 2020/2021: r = {korrelasjon_vinter:.3f} ({len(vinter)} dager)")
 
+# standardavvik for sommer og vinter
+standardavvik_sommer = sommer[["Solkraftproduksjon", "Vindkraft"]].std()
+standardavvik_vinter = vinter[["Solkraftproduksjon", "Vindkraft"]].std()
+
+print(f"Sommer 2020: Standardavvik = {standardavvik_sommer}")
+print(f"Vinter 2020/2021: Standardavvik = {standardavvik_vinter}")
+
 fig, (ax_sommer, ax_vinter) = plt.subplots(
     1, 2, figsize=(12, 5), sharex=True, sharey=True
 )
