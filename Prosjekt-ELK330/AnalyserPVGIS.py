@@ -157,16 +157,46 @@ korrelasjon_daglig = daglig_data["Solkraftproduksjon"].corr(
 
 print("\nDaglig korrelasjon:", korrelasjon_daglig)
 
-maaned = daglig_data.index.month
 sommer = daglig_data.loc["2020-06-01":"2020-08-31"]
 vinter = daglig_data.loc["2020-12-01":"2021-02-28"]
 
 korrelasjon_sommer = sommer["Solkraftproduksjon"].corr(sommer["Vindkraft"])
 korrelasjon_vinter = vinter["Solkraftproduksjon"].corr(vinter["Vindkraft"])
 
-print(f"Sommer 2020: r = {korrelasjon_sommer:.3f} ({len(sommer)} døgn)")
-print(f"Vinter 2020/2021: r = {korrelasjon_vinter:.3f} ({len(vinter)} døgn)")
+print(f"Sommer 2020: r = {korrelasjon_sommer:.3f} ({len(sommer)} dager)")
+print(f"Vinter 2020/2021: r = {korrelasjon_vinter:.3f} ({len(vinter)} dager)")
 
+# Scatterplot sommer: juni, julig, august 2020
+plt.scatter(
+    sommer["Solkraftproduksjon"], 
+    sommer["Vindkraft"],
+    alpha = 0.5,
+    s=12
+)
+
+plt.xlabel("Gjennomsnittlig solkraftproduksjon per døgn (MW)")
+plt.ylabel("Gjennomsnittlig beregnet vindkraft per døgn (MW)")
+plt.title("Sommer 2020: Solkraft mot beregnet vindkraft")
+plt.grid(alpha=0.3)
+plt.tight_layout()
+plt.savefig("Sommer2020_Solkraft_mot_vindkraftPVGIS.png", dpi=300)
+plt.show()
+
+# Scatterplot vinter: desember, januar, februar 2020/2021
+plt.scatter(
+    vinter["Solkraftproduksjon"], 
+    vinter["Vindkraft"],
+    alpha = 0.5,
+    s=12
+)
+
+plt.xlabel("Gjennomsnittlig solkraftproduksjon per døgn (MW)")
+plt.ylabel("Gjennomsnittlig beregnet vindkraft per døgn (MW)")
+plt.title("Vinter 2020/2021: Solkraft mot beregnet vindkraft")
+plt.grid(alpha=0.3)
+plt.tight_layout()
+plt.savefig("Vinter2020_2021_Solkraft_mot_vindkraftPVGIS.png", dpi=300)
+plt.show()
 
 # Plotter solinnstråling mot vindkraft
 plt.figure(figsize=(9, 6))
