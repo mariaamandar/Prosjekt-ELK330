@@ -152,18 +152,31 @@ korrelasjon_daglig = daglig_data["Solkraftproduksjon"].corr(
 
 print("\nDaglig korrelasjon:", korrelasjon_daglig)
 
-sommer = daglig_data.loc["2020-06-01":"2020-08-31"]
-vinter = daglig_data.loc["2020-12-01":"2021-02-28"]
+# kunne nok lagt dette inn i en funksjon...
+sommer1 = daglig_data.loc["2020-06-01":"2020-08-31"]
+sommer2 = daglig_data.loc["2018-06-01":"2018-08-31"]
+sommer3 = daglig_data.loc["2019-06-01":"2019-08-31"]
+vinter1 = daglig_data.loc["2020-12-01":"2021-02-28"]
+vinter2 = daglig_data.loc["2018-12-01":"2019-02-28"]
+vinter3 = daglig_data.loc["2019-12-01":"2020-02-29"]
 
-korrelasjon_sommer = sommer["Solkraftproduksjon"].corr(sommer["Vindkraft"])
-korrelasjon_vinter = vinter["Solkraftproduksjon"].corr(vinter["Vindkraft"])
+korrelasjon_sommer1 = sommer1["Solkraftproduksjon"].corr(sommer1["Vindkraft"])
+korrelasjon_sommer2 = sommer2["Solkraftproduksjon"].corr(sommer2["Vindkraft"])
+korrelasjon_sommer3 = sommer3["Solkraftproduksjon"].corr(sommer3["Vindkraft"])
+korrelasjon_vinter1 = vinter1["Solkraftproduksjon"].corr(vinter1["Vindkraft"])
+korrelasjon_vinter2 = vinter2["Solkraftproduksjon"].corr(vinter2["Vindkraft"])
+korrelasjon_vinter3 = vinter3["Solkraftproduksjon"].corr(vinter3["Vindkraft"])
 
-print(f"Sommer 2020: r = {korrelasjon_sommer:.3f} ({len(sommer)} dager)")
-print(f"Vinter 2020/2021: r = {korrelasjon_vinter:.3f} ({len(vinter)} dager)")
+print(f"Sommer 2020: r = {korrelasjon_sommer1:.3f} ({len(sommer1)} dager)")
+print(f"Sommer 2018: r = {korrelasjon_sommer2:.3f} ({len(sommer2)} dager)")
+print(f"Sommer 2019: r = {korrelasjon_sommer3:.3f} ({len(sommer3)} dager)")
+print(f"Vinter 2020/2021: r = {korrelasjon_vinter1:.3f} ({len(vinter1)} dager)")
+print(f"Vinter 2018/2019: r = {korrelasjon_vinter2:.3f} ({len(vinter2)} dager)")
+print(f"Vinter 2019/2020: r = {korrelasjon_vinter3:.3f} ({len(vinter3)} dager)")
 
-# standardavvik for sommer og vinter
-standardavvik_sommer = sommer[["Solkraftproduksjon", "Vindkraft"]].std()
-standardavvik_vinter = vinter[["Solkraftproduksjon", "Vindkraft"]].std()
+# standardavvik for sommer1 og vinter1
+standardavvik_sommer = sommer1[["Solkraftproduksjon", "Vindkraft"]].std()
+standardavvik_vinter = vinter1[["Solkraftproduksjon", "Vindkraft"]].std()
 
 print(f"Sommer 2020: Standardavvik = {standardavvik_sommer}")
 print(f"Vinter 2020/2021: Standardavvik = {standardavvik_vinter}")
@@ -173,23 +186,23 @@ fig, (ax_sommer, ax_vinter) = plt.subplots(
 )
 
 ax_sommer.scatter(
-    sommer["Solkraftproduksjon"] * 1_000_000,
-    sommer["Vindkraft"],
+    sommer1["Solkraftproduksjon"] * 1_000_000,
+    sommer1["Vindkraft"],
     color="tab:orange",
     alpha=0.6,
     s=25
 )
-ax_sommer.set_title(f"Sommer 2020 ($r = {korrelasjon_sommer:.3f}$)")
+ax_sommer.set_title(f"Sommer 2020 ($r = {korrelasjon_sommer1:.3f}$)")
 ax_sommer.grid(alpha=0.3)
 
 ax_vinter.scatter(
-    vinter["Solkraftproduksjon"] * 1_000_000,
-    vinter["Vindkraft"],
+    vinter1["Solkraftproduksjon"] * 1_000_000,
+    vinter1["Vindkraft"],
     color="tab:blue",
     alpha=0.6,
     s=25
 )
-ax_vinter.set_title(f"Vinter 2020/2021 ($r = {korrelasjon_vinter:.3f}$)")
+ax_vinter.set_title(f"Vinter 2020/2021 ($r = {korrelasjon_vinter1:.3f}$)")
 ax_vinter.grid(alpha=0.3)
 
 fig.supxlabel("Gjennomsnittlig solkraftproduksjon per døgn (W)")
@@ -201,8 +214,8 @@ plt.show()
 
 # Scatterplot sommer: juni, julig, august 2020
 plt.scatter(
-    sommer["Solkraftproduksjon"], 
-    sommer["Vindkraft"],
+    sommer1["Solkraftproduksjon"], 
+    sommer1["Vindkraft"],
     alpha = 0.5,
     s=12
 )
@@ -217,8 +230,8 @@ plt.show()
 
 # Scatterplot vinter: desember, januar, februar 2020/2021
 plt.scatter(
-    vinter["Solkraftproduksjon"], 
-    vinter["Vindkraft"],
+    vinter1["Solkraftproduksjon"], 
+    vinter1["Vindkraft"],
     alpha = 0.5,
     s=12
 )
