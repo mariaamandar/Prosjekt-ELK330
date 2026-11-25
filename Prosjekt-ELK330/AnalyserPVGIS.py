@@ -196,7 +196,7 @@ fig.supxlabel("Gjennomsnittlig solkraftproduksjon per døgn (W)")
 fig.supylabel("Gjennomsnittlig beregnet vindkraft per døgn (MW)")
 
 fig.tight_layout()
-fig.savefig("PVGIS_sommer_vinter.png", dpi=300)
+fig.savefig("PVGISanalyse/PVGIS_sommer_vinter.png", dpi=300)
 plt.show()
 
 # Scatterplot sommer: juni, julig, august 2020
@@ -228,7 +228,7 @@ plt.ylabel("Gjennomsnittlig beregnet vindkraft per døgn (MW)")
 plt.title("Vinter 2020/2021: Solkraft mot beregnet vindkraft")
 plt.grid(alpha=0.3)
 plt.tight_layout()
-plt.savefig("Vinter2020_2021_Solkraft_mot_vindkraftPVGIS.png", dpi=300)
+plt.savefig("PVGISanalyse/Vinter2020_2021_Solkraft_mot_vindkraftPVGIS.png", dpi=300)
 plt.show()
 
 # Plotter solinnstråling mot vindkraft
@@ -250,7 +250,7 @@ plt.title(
 
 plt.grid(alpha=0.3)
 plt.tight_layout()
-plt.savefig("Solkraft_mot_vindkraftPVGIS.png", dpi=300)
+plt.savefig("PVGISanalyse/Solkraft_mot_vindkraftPVGIS.png", dpi=300)
 plt.show()
 
 # Plotter daglig solinnstråling mot daglig vindkraft
@@ -272,7 +272,7 @@ plt.title(
 
 plt.grid(alpha=0.3)
 plt.tight_layout()
-plt.savefig("Daglig_solkraft_mot_vindkraftPVGIS.png", dpi=300)
+plt.savefig("PVGISanalyse/Daglig_solkraft_mot_vindkraftPVGIS.png", dpi=300)
 plt.show()
 
 # Konverterer solinnstråling (G(i)) til numeriske verdier
@@ -301,7 +301,7 @@ plt.title(
 plt.grid(alpha=0.3)
 plt.tight_layout()
 
-plt.savefig("Solinnstraling_2018_2021.png", dpi=300)
+plt.savefig("PVGISanalyse/Solinnstraling_2018_2021.png", dpi=300)
 
 plt.show()
 
@@ -324,7 +324,7 @@ plt.title(
 plt.grid(alpha=0.3)
 plt.tight_layout()
 
-plt.savefig("Vindhastighet_2018_2021.png", dpi=300)
+plt.savefig("PVGISanalyse/Vindhastighet_2018_2021.png", dpi=300)
 
 plt.show()
 
@@ -346,6 +346,6 @@ plt.title(
 plt.grid(alpha=0.3)
 plt.tight_layout()
 
-plt.savefig("Vindproduksjon_2018_2021.png", dpi=300)
+plt.savefig("PVGISanalyse/Vindproduksjon_2018_2021.png", dpi=300)
 
 plt.show()
