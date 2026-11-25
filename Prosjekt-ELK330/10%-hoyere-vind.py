@@ -1,3 +1,6 @@
+# limte inn hele analyserPVGIS koden, og la til 10% økning, denne inneholder ikke de ekstra sesongene
+# denne er "kun" for å se på korrelasjonen med økningen
+
 import pandas as pd
 import matplotlib.pyplot as plt
 
