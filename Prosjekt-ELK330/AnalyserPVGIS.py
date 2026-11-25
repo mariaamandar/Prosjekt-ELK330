@@ -34,7 +34,7 @@ pvgis.index = pvgis.index.round("h")
 
 # Konverterer PV power til numeriske verdier
 pvgis["P"] = pd.to_numeric(pvgis["P"], errors="coerce")
-
+pvgis[["P"]].to_csv("solkraft_klargjort.csv")
 # Konverterer vindhastighet til numeriske verdier
 pvgis["WS10m"] = pd.to_numeric(pvgis["WS10m"], errors="coerce")
 

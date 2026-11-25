@@ -89,6 +89,7 @@ print("Siste tidspunkt:", data.index.max())
 
 # Sjekker antall observasjoner per år
 antall_per_aar = data.groupby(data.index.year).size()
+# denne blir tom i terminalen?
 
 print("Antall observasjoner per år:")
 print(antall_per_aar)
