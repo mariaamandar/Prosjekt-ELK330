@@ -119,6 +119,26 @@ print(
     daglig["Sol"].corr(daglig["Wind"])
 )
 
+# korrelasjon for felles perioden 2020-2021
+data_felles = data.sort_index().loc["2020":"2021"]
+daglig_felles = daglig.loc["2020":"2021"]
+korrelasjon_felles = data_felles["Sol"].corr(data_felles["Wind"])
+korrelasjon_daglig = daglig_felles["Sol"].corr(daglig_felles["Wind"])
+
+print(f"Korrelasjon, timesverdier, felles: {korrelasjon_felles:.4f}")
+print(f"Korrelasjon, daglig, felles: {korrelasjon_daglig:.4f}")
+
+
+# Plotter scatterplott for døgnverdiene for fellesperioden 2020-2021
+plt.figure(figsize=(8, 5))
+plt.scatter(daglig_felles["Sol"], daglig_felles["Wind"], alpha=0.5, s=12)
+plt.xlabel("Daglig gjennomsnittlig solkraftproduksjon (MW)")
+plt.ylabel("Daglig gjennomsnittlig vindkraftproduksjon (MW)")
+plt.title("Daglig solkraft mot vindkraft (2020-2021)")
+plt.grid()
+plt.savefig("ENTSO-EAnalyse/ENTSO-E-Daglig_solkraft_mot_vindkraft_20-21.png", dpi=300)
+plt.show()
+
 
 # Plotter solkraft mot vindkraft (timeverdier)
 plt.figure(figsize=(8, 5))
@@ -129,7 +149,7 @@ plt.xlabel("Solkraftproduksjon (MW)")
 plt.ylabel("Vindkraftproduksjon (MW)")
 plt.title("Solkraft mot vindkraft")
 plt.grid()
-plt.savefig("ENTSO-EAnalyse/Solkraft_mot_vindkraftENTSO-E.png", dpi=300)
+#plt.savefig("ENTSO-EAnalyse/Solkraft_mot_vindkraftENTSO-E.png", dpi=300)
 plt.show()
 
 
@@ -142,7 +162,7 @@ plt.xlabel("Daglig gjennomsnittlig solkraftproduksjon (MW)")
 plt.ylabel("Daglig gjennomsnittlig vindkraftproduksjon (MW)")
 plt.title("Daglig solkraft mot vindkraft")
 plt.grid()
-plt.savefig("ENTSO-EAnalyse/Daglig_solkraft_mot_vindkraftENTSO-E.png", dpi=300)
+#plt.savefig("ENTSO-EAnalyse/Daglig_solkraft_mot_vindkraftENTSO-E.png", dpi=300)
 plt.show()
 
 
@@ -156,7 +176,7 @@ plt.xlabel("Tid")
 plt.ylabel("Solkraftproduksjon (MW)")
 plt.title("Solkraftproduksjon")
 plt.grid()
-plt.savefig("ENTSO-EAnalyse/SolkraftproduksjonMotTidENTSO-E.png", dpi=300)
+#plt.savefig("ENTSO-EAnalyse/SolkraftproduksjonMotTidENTSO-E.png", dpi=300)
 plt.show()
 
 
@@ -170,7 +190,7 @@ plt.xlabel("Tid")
 plt.ylabel("Vindkraftproduksjon (MW)")
 plt.title("Vindkraftproduksjon")
 plt.grid()
-plt.savefig("ENTSO-EAnalyse/VindkraftproduksjonMotTidENTSO-E.png", dpi=300)
+#plt.savefig("ENTSO-EAnalyse/VindkraftproduksjonMotTidENTSO-E.png", dpi=300)
 plt.show()
 
 
@@ -190,7 +210,7 @@ plt.xlabel("Tid")
 plt.ylabel("Solkraftproduksjon (MW)")
 plt.title("Solkraftproduksjon, redusert støy (7 dagers gjennomsnitt)")
 plt.grid()
-plt.savefig("ENTSO-EAnalyse/Solkraftproduksjon_redusert_stoyENTSO-E.png", dpi=300)
+#plt.savefig("ENTSO-EAnalyse/Solkraftproduksjon_redusert_stoyENTSO-E.png", dpi=300)
 plt.show()
 
 
@@ -203,5 +223,5 @@ plt.xlabel("Tid")
 plt.ylabel("Vindkraftproduksjon (MW)")
 plt.title("Vindkraftproduksjon, redusert støy (7 dagers gjennomsnitt)")
 plt.grid()
-plt.savefig("ENTSO-EAnalyse/Vindkraftproduksjon_redusert_stoyENTSO-E.png", dpi=300)
+#plt.savefig("ENTSO-EAnalyse/Vindkraftproduksjon_redusert_stoyENTSO-E.png", dpi=300)
 plt.show()

@@ -109,8 +109,7 @@ print(data.isna().sum())
 
 print(
     "Antall dupliserte tidspunkter:",
-    data.index.duplicated().sum()
-)
+    data.index.duplicated().sum())
 
 print("Første tidspunkt:", data.index.min())
 print("Siste tidspunkt:", data.index.max())
@@ -147,10 +146,18 @@ print("Antall dager:", len(daglig_data))
 
 # Beregner korrelasjon for dagsverdier
 korrelasjon_daglig = daglig_data["Solkraftproduksjon"].corr(
-    daglig_data["Vindkraft"]
-)
+    daglig_data["Vindkraft"])
 
 print("\nDaglig korrelasjon:", korrelasjon_daglig)
+
+# henter ut data for felles perioden 2020-2021
+data_felles  = data.sort_index().loc["2020":"2021"] #timesverdiene
+daglig_felles = daglig_data.loc["2020":"2021"] # daglige verdiene
+korrelasjon_felles = data_felles["Solkraftproduksjon"].corr(data_felles["Vindkraft"])
+korrelasjon_daglig_felles = daglig_felles["Solkraftproduksjon"].corr(daglig_felles["Vindkraft"])
+
+print(f"Korrelasjon, timesverdier, felles: {korrelasjon_felles:.4f}")
+print(f"Korrelasjon, daglig, felles: {korrelasjon_daglig_felles:.4f}")
 
 # kunne nok lagt dette inn i en funksjon...
 sommer1 = daglig_data.loc["2020-06-01":"2020-08-31"]
@@ -174,11 +181,17 @@ print(f"Vinter 2020/2021: r = {korrelasjon_vinter1:.3f} ({len(vinter1)} dager)")
 print(f"Vinter 2018/2019: r = {korrelasjon_vinter2:.3f} ({len(vinter2)} dager)")
 print(f"Vinter 2019/2020: r = {korrelasjon_vinter3:.3f} ({len(vinter3)} dager)")
 
+# gjennomsnitt for sommer1 og vinter1
+gjennomsnitt_sommer = sommer1[["Solkraftproduksjon", "Vindkraft"]].mean()
+gjennomsnitt_vinter = vinter1[["Solkraftproduksjon", "Vindkraft"]].mean()
+
 # standardavvik for sommer1 og vinter1
 standardavvik_sommer = sommer1[["Solkraftproduksjon", "Vindkraft"]].std()
 standardavvik_vinter = vinter1[["Solkraftproduksjon", "Vindkraft"]].std()
 
+print(f"Sommer 2020: Gjennomsnitt = {gjennomsnitt_sommer}")
 print(f"Sommer 2020: Standardavvik = {standardavvik_sommer}")
+print(f"Vinter 2020/2021: Gjennomsnitt = {gjennomsnitt_vinter}")
 print(f"Vinter 2020/2021: Standardavvik = {standardavvik_vinter}")
 
 fig, (ax_sommer, ax_vinter) = plt.subplots(
@@ -209,7 +222,7 @@ fig.supxlabel("Gjennomsnittlig solkraftproduksjon per døgn (W)")
 fig.supylabel("Gjennomsnittlig beregnet vindkraft per døgn (MW)")
 
 fig.tight_layout()
-fig.savefig("PVGISanalyse/PVGIS_sommer_vinter.png", dpi=300)
+#fig.savefig("PVGISanalyse/PVGIS_sommer_vinter.png", dpi=300)
 plt.show()
 
 # Scatterplot sommer: juni, julig, august 2020
@@ -225,7 +238,7 @@ plt.ylabel("Gjennomsnittlig beregnet vindkraft per døgn (MW)")
 plt.title("Sommer 2020: Solkraft mot beregnet vindkraft")
 plt.grid(alpha=0.3)
 plt.tight_layout()
-plt.savefig("Sommer2020_Solkraft_mot_vindkraftPVGIS.png", dpi=300)
+#plt.savefig("Sommer2020_Solkraft_mot_vindkraftPVGIS.png", dpi=300)
 plt.show()
 
 # Scatterplot vinter: desember, januar, februar 2020/2021
@@ -241,8 +254,25 @@ plt.ylabel("Gjennomsnittlig beregnet vindkraft per døgn (MW)")
 plt.title("Vinter 2020/2021: Solkraft mot beregnet vindkraft")
 plt.grid(alpha=0.3)
 plt.tight_layout()
-plt.savefig("PVGISanalyse/Vinter2020_2021_Solkraft_mot_vindkraftPVGIS.png", dpi=300)
+#plt.savefig("PVGISanalyse/Vinter2020_2021_Solkraft_mot_vindkraftPVGIS.png", dpi=300)
 plt.show()
+
+
+# plotter scatterplott for døgnverdiene perioden 2020-2021
+plt.figure(figsize=(8, 5))
+plt.scatter(
+    daglig_felles["Solkraftproduksjon"] * 1_000_000,
+    daglig_felles["Vindkraft"],
+    alpha=0.5,
+    s=12)
+plt.xlabel("Gjennomsnittlig solkraftproduksjon per døgn (W)")
+plt.ylabel("Gjennomsnittlig beregnet vindkraft per døgn (MW)")
+plt.title("Daglig solkraft mot beregnet vindkraft (2020-2021)")
+plt.grid(alpha=0.3)
+plt.tight_layout()
+plt.savefig("PVGISanalyse/Daglig_solkraft_mot_vindkraft_2020_2021.png", dpi=300)
+plt.show()
+
 
 # Plotter solinnstråling mot vindkraft
 plt.figure(figsize=(9, 6))
@@ -263,7 +293,7 @@ plt.title(
 
 plt.grid(alpha=0.3)
 plt.tight_layout()
-plt.savefig("PVGISanalyse/Solkraft_mot_vindkraftPVGIS.png", dpi=300)
+#plt.savefig("PVGISanalyse/Solkraft_mot_vindkraftPVGIS.png", dpi=300)
 plt.show()
 
 # Plotter daglig solinnstråling mot daglig vindkraft
@@ -285,7 +315,7 @@ plt.title(
 
 plt.grid(alpha=0.3)
 plt.tight_layout()
-plt.savefig("PVGISanalyse/Daglig_solkraft_mot_vindkraftPVGIS.png", dpi=300)
+#plt.savefig("PVGISanalyse/Daglig_solkraft_mot_vindkraftPVGIS.png", dpi=300)
 plt.show()
 
 # Konverterer solinnstråling (G(i)) til numeriske verdier
@@ -314,7 +344,7 @@ plt.title(
 plt.grid(alpha=0.3)
 plt.tight_layout()
 
-plt.savefig("PVGISanalyse/Solinnstraling_2018_2021.png", dpi=300)
+#plt.savefig("PVGISanalyse/Solinnstraling_2018_2021.png", dpi=300)
 
 plt.show()
 
@@ -337,7 +367,7 @@ plt.title(
 plt.grid(alpha=0.3)
 plt.tight_layout()
 
-plt.savefig("PVGISanalyse/Vindhastighet_2018_2021.png", dpi=300)
+#plt.savefig("PVGISanalyse/Vindhastighet_2018_2021.png", dpi=300)
 
 plt.show()
 
@@ -359,6 +389,6 @@ plt.title(
 plt.grid(alpha=0.3)
 plt.tight_layout()
 
-plt.savefig("PVGISanalyse/Vindproduksjon_2018_2021.png", dpi=300)
+#plt.savefig("PVGISanalyse/Vindproduksjon_2018_2021.png", dpi=300)
 
 plt.show()
